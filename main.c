@@ -1,15 +1,20 @@
 #include <stdio.h>
+#include "token.h"
 #include <stdlib.h>
-#include <string.h>
 
 int main(int argc, char **argv){
 	char buffer[255];
 
+  token_vector tokens;
+  init_vector(&tokens);
+
 	// while is text in stdin
 	while(fgets(buffer, sizeof(buffer), stdin)){
-		buffer[strlen(buffer) - 1] = '\0';
-		printf("%s\n", buffer);
+    tokenize(buffer, &tokens);
+    print_tokens(&tokens);
 	}
+
+  free_vector(&tokens);
 
 	return EXIT_SUCCESS;
 }
