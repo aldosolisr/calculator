@@ -23,9 +23,9 @@ int main(int argc, char **argv){
 	while(fgets(buffer, sizeof(buffer), stdin)){
     init_vector(&tokens);
     tokenize(buffer, &tokens);
-    print_tokens(&tokens);
     ast_node *root = parse_tokens(&tokens);
     print_ast_indented(root, 2);
+    free_ast(root);
     free_vector(&tokens);
 	}
 

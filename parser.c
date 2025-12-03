@@ -6,49 +6,12 @@ static unsigned int pos;
 static const token_vector *tokens;
 static token_t current;
 
-ast_node *new_number(double n) {
-  ast_node *node = malloc(sizeof(ast_node));
-  node->type = AST_NUMBER;
-  node->as.number = n;
-  return node;
-}
-
-ast_node *new_identifier(const char *name) {
-  ast_node *node = malloc(sizeof(ast_node));
-  node->type = AST_IDENTIFIER;
-  node->as.identifier = strdup(name);
-  return node;
-}
-
-ast_node *new_binary(char op, ast_node *left, ast_node *right) {
-  ast_node *node = malloc(sizeof(ast_node));
-  node->type = AST_BINARY;
-  node->as.binary.op = op;
-  node->as.binary.left = left;
-  node->as.binary.right = right;
-  return node;
-}
-
-ast_node *new_assign(const char *id, ast_node *value) {
-  ast_node *node = malloc(sizeof(ast_node));
-  node->type = AST_ASSIGN;
-  node->as.assign.id = strdup(id);
-  node->as.assign.value = value;
-  return node;
-}
-
-ast_node *new_exit() {
-  ast_node *node = malloc(sizeof(ast_node));
-  node->type = AST_EXIT;
-  return node;
-}
 
 static void advance() {
   if (pos < tokens->size)
     current = tokens->data[pos++];
   else
     current = (token_t){.type = TOKEN_END};
-  printf("%s\n", current.value);
 }
 token_t peek() {
   if (pos > tokens->size) {
