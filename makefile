@@ -1,5 +1,5 @@
 all:
-	gcc -o compiler main.c tokenizer.c
+	gcc -o calculator main.c tokenizer.c parser.c ast_print.c
 
 run: 
-	./compiler
+	./calculator

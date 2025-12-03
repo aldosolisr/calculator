@@ -2,7 +2,6 @@
 #ifndef TOKEN_H
 #define TOKEN_H
 
-/*  */
 typedef enum {
   TOKEN_ADD,
   TOKEN_SUBS,
@@ -14,12 +13,15 @@ typedef enum {
   TOKEN_IDEN,
   TOKEN_ASIGN,
   TOKEN_NUM,
+  TOKEN_EXIT,
+  TOKEN_END,
   TOKEN_UNKNOWN
 } token_type;
 
+
 typedef struct {
   token_type type;
-  char value[255];
+  char value[256];
 } token_t;
 
 typedef struct {
@@ -33,5 +35,6 @@ void init_vector(token_vector *vector);
 void push_back(token_vector *vector, token_t token);
 void free_vector(token_vector *vector);
 void print_tokens(token_vector *vector);
+const char* get_token_symbol(token_type token);
 
 #endif

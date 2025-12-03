@@ -53,6 +53,10 @@ void tokenize(char *source, token_vector *tokens) {
       buffer.value[value_index] = '\0';
       buffer.type = TOKEN_IDEN;
 
+      if(!strcmp(buffer.value, "exit")){
+        buffer.type = TOKEN_EXIT;
+      }
+
       push_back(tokens, buffer);
       continue;
     }
@@ -102,7 +106,44 @@ void tokenize(char *source, token_vector *tokens) {
       break;
     default:
       buffer.type = TOKEN_UNKNOWN;
+      buffer.value[0] = source[source_index - 1];
+      buffer.value[1] = '\0';
     }
     push_back(tokens, buffer);
   }
+  buffer.type = TOKEN_END;
+  strcpy(buffer.value, "END");
+  push_back(tokens, buffer);
+}
+
+const char* get_token_symbol(token_type token) {
+    switch (token) {
+        case TOKEN_ADD:
+            return "+";
+        case TOKEN_SUBS:
+            return "-";
+        case TOKEN_LPAR:
+            return "(";
+        case TOKEN_RPAR:
+            return ")";
+        case TOKEN_DIV:
+            return "/";
+        case TOKEN_MULT:
+            return "*";
+        case TOKEN_EXP:
+            return "^";
+        case TOKEN_ASIGN:
+            return "=";
+        // Aquí está el que quieres
+        case TOKEN_IDEN:
+            return "IDENTIFIER"; 
+        case TOKEN_NUM:
+            return "NUMBER";
+        case TOKEN_EXIT:
+            return "TOKEN_EXIT";
+        case TOKEN_END:
+            return "TOKEN_END";
+        case TOKEN_UNKNOWN:
+            return "TOKEN_UNKNOWN";
+    }
 }
