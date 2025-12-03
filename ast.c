@@ -40,6 +40,8 @@ void free_ast(ast_node *node) {
   free(node);
 }
 
+
+
 ast_node *new_number(double n) {
   ast_node *node = malloc(sizeof(ast_node));
   node->type = AST_NUMBER;
